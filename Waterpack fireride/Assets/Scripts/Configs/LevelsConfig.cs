@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Configs
@@ -9,5 +10,22 @@ namespace Configs
         [SerializeField]
         private List<Level> levels;
         public List<Level> Levels => levels;
+
+        public Level GetCurrentLevel()
+        {
+            return Levels.Where(level => level.LevelState.Equals(LevelState.Current)).First();
+        }
+
+        public int GetCurrentLevelIndex()
+        {
+            for (int i = 0; i < levels.Count; i++)
+            {
+                if (levels[i].LevelState.Equals(LevelState.Current))
+                {
+                    return i;
+                }
+            }
+            return 0;
+        }
     }
 }

@@ -13,8 +13,19 @@ MonoBehaviour:
   m_Name: LevelsConfig
   m_EditorClassIdentifier: 
   levels:
-  - levelNumber: 1
-    levelName: First Steps
-    sceneName: 
+  - levelName: First Steps
+    sceneName: Assets/Scenes/Level.unity
+    bestTime: 0
+    levelState: 0
+  - levelName: Second Step
+    sceneName: Assets/Scenes/Level.unity
+    bestTime: 0
+    levelState: 0
+  - levelName: Third Step
+    sceneName: Assets/Scenes/Level.unity
+    bestTime: 0
+    levelState: 1
+  - levelName: Last Step
+    sceneName: Assets/Scenes/Level.unity
     bestTime: 0
     levelState: 2

@@ -15,10 +15,6 @@ namespace Configs
     internal class Level
     {
         [SerializeField]
-        private uint levelNumber;
-        public uint LevelNumber => levelNumber;
-
-        [SerializeField]
         private string levelName;
         public string LevelName => levelName;
 

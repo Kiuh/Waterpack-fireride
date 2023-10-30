@@ -11,9 +11,6 @@ namespace General
         [SerializeField]
         private string mainScene;
 
-        [SerializeField]
-        private string baseLevelSceneName;
-
         public static LevelManager Instance;
 
         private void Awake()
@@ -34,9 +31,14 @@ namespace General
             SceneManager.LoadScene(mainScene);
         }
 
-        public void LoadLevel(uint levelNumber)
+        public void LoadLevel(string levelSceneName)
         {
-            SceneManager.LoadScene(baseLevelSceneName + levelNumber);
+            SceneManager.LoadScene(levelSceneName);
+        }
+
+        public void RestartCurrentLevel()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }

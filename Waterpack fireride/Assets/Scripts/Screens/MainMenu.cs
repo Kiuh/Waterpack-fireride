@@ -1,4 +1,6 @@
 ﻿using Configs;
+using General;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +16,9 @@ namespace Screens
         private Button buttonSelectLevel;
 
         [SerializeField]
+        private SelectLevel selectLevelMenu;
+
+        [SerializeField]
         private Button buttonMusic;
 
         [SerializeField]
@@ -24,6 +29,12 @@ namespace Screens
 
         [SerializeField]
         private GeneralSettings generalSettings;
+
+        [SerializeField]
+        private LevelsConfig levelsConfig;
+
+        [SerializeField]
+        private LevelManager levelManager;
 
         private void Awake()
         {
@@ -36,22 +47,27 @@ namespace Screens
 
         private void PlayPress()
         {
-            // TODO: implement
+            string currentLevelSceneName = levelsConfig.GetCurrentLevel().SceneName;
+            levelManager.LoadLevel(currentLevelSceneName);
         }
 
         private void SelectLevelPress()
         {
-            // TODO: implement
+            selectLevelMenu.ShowSelectLevelPanel();
         }
 
         private void MusicPress()
         {
-            // TODO: implement
+            generalSettings.MusicSwitch = !generalSettings.MusicSwitch;
+            buttonMusic.GetComponentInChildren<TextMeshProUGUI>().text =
+                "Music\n" + (generalSettings.MusicSwitch ? "ON" : "OFF");
         }
 
         private void SoundPress()
         {
-            // TODO: implement
+            generalSettings.SoundSwitch = !generalSettings.SoundSwitch;
+            buttonSound.GetComponentInChildren<TextMeshProUGUI>().text =
+                "Sound\n" + (generalSettings.SoundSwitch ? "ON" : "OFF");
         }
 
         private void AboutPress()
