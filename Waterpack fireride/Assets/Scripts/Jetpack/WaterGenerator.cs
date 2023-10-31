@@ -1,5 +1,6 @@
 ﻿using Common;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Jetpack
@@ -8,7 +9,13 @@ namespace Jetpack
     public struct GenerationInfo
     {
         public float StartForce;
-        public float DegreesDelta;
+    }
+
+    [Serializable]
+    public struct TransformWithDirection
+    {
+        public Transform Transform;
+        public VerticalDirection ProduceDirection;
     }
 
     [AddComponentMenu("Jetpack.WaterGenerator")]
@@ -27,7 +34,7 @@ namespace Jetpack
         private float waterGenerationPerSecond;
 
         [SerializeField]
-        private Transform generationPoint;
+        private List<TransformWithDirection> produceDirectionPoints;
 
         [SerializeField]
         [InspectorReadOnly]
@@ -37,6 +44,16 @@ namespace Jetpack
         {
             get => generating;
             set => generating = value;
+        }
+
+        [SerializeField]
+        [InspectorReadOnly]
+        private VerticalDirection produceDirection;
+
+        public VerticalDirection ProduceDirection
+        {
+            get => produceDirection;
+            set => produceDirection = value;
         }
 
         [SerializeField]
@@ -76,19 +93,16 @@ namespace Jetpack
 
         private void ProduceWater()
         {
+            Vector3 point = produceDirectionPoints
+                .Find(x => x.ProduceDirection == produceDirection)
+                .Transform.position;
             WaterPiece water = Instantiate(
                 waterPiecePrefab,
-                generationPoint.transform.position,
+                point,
                 waterPiecePrefab.transform.rotation
             );
             water.RigidBody2D.AddForce(
-                Quaternion.Euler(
-                    Vector3.up
-                        * UnityEngine.Random.Range(
-                            -generationInfo.DegreesDelta,
-                            generationInfo.DegreesDelta
-                        )
-                )
+                Quaternion.Euler(Vector3.up * produceDirection.ToFloat())
                     * Vector2.down
                     * generationInfo.StartForce,
                 ForceMode2D.Impulse

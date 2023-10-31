@@ -1,4 +1,6 @@
-﻿using Jetpack;
+﻿using Common;
+using Jetpack;
+using Player.Movement;
 using UnityEngine;
 
 namespace Player
@@ -7,10 +9,16 @@ namespace Player
     internal class Controller : MonoBehaviour
     {
         [SerializeField]
-        private Movement movement;
+        private Flying flyMovement;
 
         [SerializeField]
-        private CollisionCheck collisionCheck;
+        private Jumping jumping;
+
+        [SerializeField]
+        private GroundCheck groundCheck;
+
+        [SerializeField]
+        private WallCheck wallCheck;
 
         [SerializeField]
         private Fuel fuel;
@@ -24,18 +32,56 @@ namespace Player
         [SerializeField]
         private WaterGenerator waterGenerator;
 
+        [SerializeField]
+        private DragHandler dragHandler;
+
+        [SerializeField]
+        private float neededTouchDelta;
+
+        [SerializeField]
+        [InspectorReadOnly]
+        private float touchDelta;
+
         private void Awake()
         {
-            collisionCheck.OnGroundTouch += stamina.FillMaxStamina;
-            collisionCheck.OnWallTouch += view.Flip;
+            groundCheck.OnGroundTouch += stamina.FillMaxStamina;
+            wallCheck.OnWallTouch += view.Flip;
         }
 
         private void Update()
         {
             if (Input.touchCount > 0)
             {
+                touchDelta += Time.deltaTime;
+            }
+            else
+            {
+                touchDelta = 0;
+            }
+
+            if (
+                Input.touchCount > 0
+                && Input.GetTouch(0).phase == TouchPhase.Ended
+                && touchDelta <= neededTouchDelta
+            )
+            {
+                jumping.Jump();
+            }
+            else if (
+                Input.touchCount > 0
+                && dragHandler.DraggingStarted
+                && dragHandler.Direction != Direction.None
+                && dragHandler.Direction != Direction.Left
+                && dragHandler.Direction != Direction.Right
+            )
+            {
                 fuel.Absorbing = true;
                 stamina.Absorbing = true;
+                flyMovement.FlyDirection =
+                    dragHandler.Direction == Direction.Up
+                        ? VerticalDirection.Up
+                        : VerticalDirection.Down;
+                waterGenerator.ProduceDirection = flyMovement.FlyDirection;
             }
             else
             {
@@ -45,12 +91,12 @@ namespace Player
 
             if (fuel.Absorbing && fuel.CanAbsorbing && stamina.CanAbsorbing)
             {
-                movement.Flying = true;
+                flyMovement.IsFlying = true;
                 waterGenerator.Generating = true;
             }
             else
             {
-                movement.Flying = false;
+                flyMovement.IsFlying = false;
                 waterGenerator.Generating = false;
             }
         }
