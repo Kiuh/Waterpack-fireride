@@ -131,14 +131,14 @@ namespace Screens
                 rectTransform.anchoredPosition.x
                 - targetLevelGO.transform.position.x
                 + contentTransform.position.x;
-            Debug.Log(
-                "Cont: "
-                    + contentTransform.position.x
-                    + "' Target: "
-                    + targetToSnapX
-                    + ", Snap: "
-                    + targetLevelGO.transform.position.x
-            );
+            //Debug.Log(
+            //    "Cont: "
+            //        + contentTransform.position.x
+            //        + "' Target: "
+            //        + targetToSnapX
+            //        + ", Snap: "
+            //        + targetLevelGO.transform.position.x
+            //);
         }
 
         private void UpdateLevelText(int index)
