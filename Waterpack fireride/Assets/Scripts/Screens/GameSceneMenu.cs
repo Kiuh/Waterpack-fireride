@@ -65,6 +65,8 @@ namespace Screens
 
         private Image pausePanelImage;
 
+        private float playingTime = 0;
+
         private void Awake()
         {
             pausePanelCanvasGroup = pausePanelGO.GetComponent<CanvasGroup>();
@@ -112,37 +114,43 @@ namespace Screens
         private void ContinuePress()
         {
             pausePanelCanvasGroup.blocksRaycasts = false;
-            _ = LeanTween.value(
-                gameObject,
-                UpdatePausePanelAlphaCallback,
-                pausePanelMaxAlpha,
-                0,
-                animationSpeed
-            );
-            _ = LeanTween.moveX(pauseButtonRectTransform, pauseButtonMaxPositionX, animationSpeed);
-            _ = LeanTween.moveY(
-                pauseMenuButtonsRectTransform,
-                pauseMenuButtonsMinPositionY,
-                animationSpeed
-            );
+            Time.timeScale = 1;
+            _ = LeanTween
+                .value(
+                    gameObject,
+                    UpdatePausePanelAlphaCallback,
+                    pausePanelMaxAlpha,
+                    0,
+                    animationSpeed
+                )
+                .setIgnoreTimeScale(true);
+            _ = LeanTween
+                .moveX(pauseButtonRectTransform, pauseButtonMaxPositionX, animationSpeed)
+                .setIgnoreTimeScale(true);
+            _ = LeanTween
+                .moveY(pauseMenuButtonsRectTransform, pauseMenuButtonsMinPositionY, animationSpeed)
+                .setIgnoreTimeScale(true);
         }
 
         private void PausePress()
         {
             pausePanelCanvasGroup.blocksRaycasts = true;
-            _ = LeanTween.value(
-                gameObject,
-                UpdatePausePanelAlphaCallback,
-                0,
-                pausePanelMaxAlpha,
-                animationSpeed
-            );
-            _ = LeanTween.moveX(pauseButtonRectTransform, pauseButtonMinPositionX, animationSpeed);
-            _ = LeanTween.moveY(
-                pauseMenuButtonsRectTransform,
-                pauseMenuButtonsMaxPositionY,
-                animationSpeed
-            );
+            Time.timeScale = 0;
+            _ = LeanTween
+                .value(
+                    gameObject,
+                    UpdatePausePanelAlphaCallback,
+                    0,
+                    pausePanelMaxAlpha,
+                    animationSpeed
+                )
+                .setIgnoreTimeScale(true);
+            _ = LeanTween
+                .moveX(pauseButtonRectTransform, pauseButtonMinPositionX, animationSpeed)
+                .setIgnoreTimeScale(true);
+            _ = LeanTween
+                .moveY(pauseMenuButtonsRectTransform, pauseMenuButtonsMaxPositionY, animationSpeed)
+                .setIgnoreTimeScale(true);
         }
 
         private void UpdatePausePanelAlphaCallback(float alpha)

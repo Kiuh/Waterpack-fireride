@@ -27,5 +27,17 @@ namespace Configs
             }
             return 0;
         }
+
+        public int GetLevelIndexByName(string name)
+        {
+            for (int i = 0; i < levels.Count; i++)
+            {
+                if (levels[i].LevelName.Equals(name))
+                {
+                    return i;
+                }
+            }
+            return 0;
+        }
     }
 }
