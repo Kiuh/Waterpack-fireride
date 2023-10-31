@@ -47,8 +47,8 @@ namespace Screens
 
         private void PlayPress()
         {
-            string currentLevelSceneName = levelsConfig.GetCurrentLevel().SceneName;
-            levelManager.LoadLevel(currentLevelSceneName);
+            Level currentLevel = levelsConfig.GetCurrentLevel();
+            levelManager.LoadLevel(currentLevel);
         }
 
         private void SelectLevelPress()

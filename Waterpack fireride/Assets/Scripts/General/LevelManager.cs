@@ -1,4 +1,5 @@
 using Common;
+using Configs;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +11,15 @@ namespace General
         [Scene]
         [SerializeField]
         private string mainScene;
+
+        [SerializeField]
+        [InspectorReadOnly]
+        private Level currentLevel;
+        public Level CurrentLevel
+        {
+            get => currentLevel;
+            set => currentLevel = value;
+        }
 
         public static LevelManager Instance;
 
@@ -31,9 +41,10 @@ namespace General
             SceneManager.LoadScene(mainScene);
         }
 
-        public void LoadLevel(string levelSceneName)
+        public void LoadLevel(Level level)
         {
-            SceneManager.LoadScene(levelSceneName);
+            currentLevel = level;
+            SceneManager.LoadScene(level.SceneName);
         }
 
         public void RestartCurrentLevel()
