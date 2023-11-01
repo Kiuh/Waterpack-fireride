@@ -6,7 +6,7 @@ namespace Jetpack
     [Serializable]
     public struct WaterInfo
     {
-        public float Extinguishing;
+        public uint Extinguishing;
         public float LifeTime;
     }
 

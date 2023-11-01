@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 1291224402646154176}
   m_Layer: 3
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -333,7 +333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8755595b0468cfc49bcd307df44db175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flyStrength: 0
+  flyStrength: 4
   rigidBody2D: {fileID: 7051262729877546782}
   collisionCheck: {fileID: 6528082964883302045}
   isFlying: 0
@@ -472,6 +472,7 @@ MonoBehaviour:
     LifeTime: 2
   generationInfo:
     StartForce: 3
+    AngleDelta: 0
   waterPiecePrefab: {fileID: 5794055748662830804, guid: 66e01b077fccd074c98cab2043dca81e, type: 3}
   waterGenerationPerSecond: 200
   produceDirectionPoints:

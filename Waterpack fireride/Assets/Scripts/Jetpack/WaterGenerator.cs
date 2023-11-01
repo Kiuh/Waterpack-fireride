@@ -9,6 +9,7 @@ namespace Jetpack
     public struct GenerationInfo
     {
         public float StartForce;
+        public float AngleDelta;
     }
 
     [Serializable]
@@ -102,8 +103,15 @@ namespace Jetpack
                 waterPiecePrefab.transform.rotation
             );
             water.RigidBody2D.AddForce(
-                Quaternion.Euler(Vector3.up * produceDirection.ToFloat())
+                Quaternion.Euler(
+                    Vector3.forward
+                        * UnityEngine.Random.Range(
+                            -generationInfo.AngleDelta,
+                            generationInfo.AngleDelta
+                        )
+                )
                     * Vector2.down
+                    * produceDirection.ToFloat()
                     * generationInfo.StartForce,
                 ForceMode2D.Impulse
             );
