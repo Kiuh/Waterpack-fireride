@@ -1,8 +1,16 @@
+using Environment;
+using Player;
 using Screens;
 using UnityEngine;
 
 public class PanelController : MonoBehaviour
 {
+    [SerializeField]
+    private BurningManager burningManager;
+
+    [SerializeField]
+    private PlayerCore playerCore;
+
     [SerializeField]
     private WinScreenMenu winScreenMenu;
 
@@ -30,6 +38,12 @@ public class PanelController : MonoBehaviour
 
     [SerializeField]
     private float pauseButtonAnimationSpeed;
+
+    private void Awake()
+    {
+        burningManager.OnAllInactive += Win;
+        playerCore.OnDeath += Lose;
+    }
 
     public void Lose()
     {

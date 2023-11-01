@@ -47,6 +47,7 @@ namespace Screens
 
         private void PlayPress()
         {
+            Time.timeScale = 1;
             Level currentLevel = levelsConfig.GetCurrentLevel();
             levelManager.LoadLevel(currentLevel);
         }

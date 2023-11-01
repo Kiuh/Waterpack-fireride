@@ -43,11 +43,13 @@ namespace Screens
 
         private void MainMenuPress()
         {
+            Time.timeScale = 1;
             levelManager.LoadMainScene();
         }
 
         private void RestartPress()
         {
+            Time.timeScale = 1;
             levelManager.RestartCurrentLevel();
         }
 

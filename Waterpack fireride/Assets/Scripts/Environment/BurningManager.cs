@@ -20,10 +20,13 @@ namespace Environment
                 FindObjectsInactive.Include,
                 FindObjectsSortMode.None
             );
+            foreach (BurningThing item in burningThings)
+            {
+                item.OnInActive += OnSomeoneInactive;
+            }
             foreach (BurningThing item in burningThings.Where(x => !x.IsUnique))
             {
                 item.SetBurningInfo(defaultBurningInfo);
-                item.OnInActive += OnSomeoneInactive;
             }
         }
 
