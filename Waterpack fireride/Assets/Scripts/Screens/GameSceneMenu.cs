@@ -65,7 +65,7 @@ namespace Screens
 
         private Image pausePanelImage;
 
-        private float playingTime = 0;
+        //private float playingTime = 0;
 
         private void Awake()
         {
