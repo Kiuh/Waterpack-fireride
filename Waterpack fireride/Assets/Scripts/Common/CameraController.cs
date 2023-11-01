@@ -11,7 +11,7 @@ namespace Common
         [SerializeField]
         private float lerpSpeed;
 
-        private void Update()
+        private void LateUpdate()
         {
             Vector3 targetPosition = target.transform.position;
             targetPosition.z = transform.position.z;
