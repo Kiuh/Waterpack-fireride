@@ -3191,6 +3191,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Box
       objectReference: {fileID: 0}
+    - target: {fileID: 2617205884090054011, guid: 1970c31b39bfd454786544301a90918b, type: 3}
+      propertyPath: firersPerAmount
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3337101063023238533, guid: 1970c31b39bfd454786544301a90918b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.21
@@ -3232,8 +3236,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7471149788353092641, guid: 1970c31b39bfd454786544301a90918b, type: 3}
+      propertyPath: isUnique
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7471149788353092641, guid: 1970c31b39bfd454786544301a90918b, type: 3}
       propertyPath: burningInfo.FireAmount
-      value: 20
+      value: 150
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3251,6 +3259,18 @@ PrefabInstance:
     - target: {fileID: 786669094236510193, guid: bb2c99b092d087e48b4fd84f20a5b5eb, type: 3}
       propertyPath: flyStrength
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291224402646154176, guid: bb2c99b092d087e48b4fd84f20a5b5eb, type: 3}
+      propertyPath: waterInfo.Extinguishing
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291224402646154176, guid: bb2c99b092d087e48b4fd84f20a5b5eb, type: 3}
+      propertyPath: generationInfo.AngleDelta
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291224402646154176, guid: bb2c99b092d087e48b4fd84f20a5b5eb, type: 3}
+      propertyPath: generationInfo.StartForce
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3795492110854701035, guid: bb2c99b092d087e48b4fd84f20a5b5eb, type: 3}
       propertyPath: dragHandler

@@ -28,7 +28,7 @@ namespace Environment
 
         [SerializeField]
         [InspectorReadOnly]
-        private uint firersShowing;
+        private int firersShowing;
 
         private List<PositionedParticle> positionedParticles = new();
 
@@ -58,7 +58,7 @@ namespace Environment
 
         private void BurningThing_OnFireAdding()
         {
-            uint delta = burningThing.BurningInfo.FireAmount - firersShowing;
+            int delta = burningThing.BurningInfo.FireAmount - firersShowing;
             if (delta > 0)
             {
                 for (int i = 0; i < delta / firersPerAmount; i++)
@@ -81,20 +81,23 @@ namespace Environment
             return new PositionedParticle() { FireObject = fire, Position = position };
         }
 
-        private void BurningThing_OnWaterAbsorbing(ContactPoint2D contact)
+        private void BurningThing_OnWaterAbsorbing(ContactPoint2D[] contacts)
         {
-            uint delta = burningThing.BurningInfo.FireAmount - firersShowing;
+            int delta = burningThing.BurningInfo.FireAmount - firersShowing;
             if (delta < 0)
             {
+                Vector2 point =
+                    contacts.Select(x => x.point).Aggregate(Vector2.zero, (x, y) => x + y)
+                    / contacts.Length;
                 positionedParticles = positionedParticles
-                    .OrderBy(x => Vector2.Distance(x.Position, contact.point))
+                    .OrderBy(x => Vector2.Distance(x.Position, point))
                     .ToList();
                 for (int i = 0; i < (-delta) / firersPerAmount; i++)
                 {
                     if (positionedParticles.Count > 0)
                     {
-                        Destroy(positionedParticles.First().FireObject);
-                        _ = positionedParticles.Remove(positionedParticles.First());
+                        Destroy(positionedParticles.Last().FireObject);
+                        _ = positionedParticles.Remove(positionedParticles.Last());
                     }
                 }
             }

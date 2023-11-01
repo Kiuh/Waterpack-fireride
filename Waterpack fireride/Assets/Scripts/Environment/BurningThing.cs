@@ -1,7 +1,6 @@
 ﻿using Jetpack;
 using Player;
 using System;
-using System.Linq;
 using UnityEngine;
 
 namespace Environment
@@ -9,7 +8,7 @@ namespace Environment
     [Serializable]
     public struct BurningInfo
     {
-        public uint FireAmount;
+        public int FireAmount;
     }
 
     [AddComponentMenu("Environment.BurningThing")]
@@ -32,7 +31,7 @@ namespace Environment
 
         public event Action OnInActive;
         public event Action OnFireAdding;
-        public event Action<ContactPoint2D> OnWaterAbsorbing;
+        public event Action<ContactPoint2D[]> OnWaterAbsorbing;
 
         public void SetBurningInfo(BurningInfo burningInfo)
         {
@@ -46,49 +45,30 @@ namespace Environment
             {
                 return;
             }
-            Debug.Log(
-                collision.contacts
-                    .Select(x => x.otherCollider.tag)
-                    .Aggregate("", (x, y) => x + " " + y)
-            );
-            if (collision.contacts.Any(x => x.otherCollider.CompareTag(PLYER_TAG)))
+            if (collision.collider.CompareTag(PLYER_TAG))
             {
-                foreach (
-                    ContactPoint2D item in collision.contacts.Where(
-                        x => x.otherCollider.CompareTag(PLYER_TAG)
-                    )
-                )
-                {
-                    CollideWithPlayer(item);
-                }
+                CollideWithPlayer(collision);
             }
-            else if (collision.contacts.Any(x => x.otherCollider.CompareTag(WATER_TAG)))
+            else if (collision.collider.CompareTag(WATER_TAG))
             {
-                foreach (
-                    ContactPoint2D item in collision.contacts.Where(
-                        x => x.otherCollider.CompareTag(WATER_TAG)
-                    )
-                )
-                {
-                    CollideWithWater(item);
-                }
+                CollideWithWater(collision);
             }
         }
 
-        private void CollideWithPlayer(ContactPoint2D collision)
+        private void CollideWithPlayer(Collision2D collision)
         {
-            if (collision.otherCollider.TryGetComponent(out PlayerCore playerCore))
+            if (collision.collider.TryGetComponent(out PlayerCore playerCore))
             {
                 playerCore.GetHit();
             }
         }
 
-        private void CollideWithWater(ContactPoint2D collision)
+        private void CollideWithWater(Collision2D collision)
         {
-            if (collision.otherCollider.TryGetComponent(out WaterPiece waterPiece))
+            if (collision.collider.TryGetComponent(out WaterPiece waterPiece))
             {
                 AbsorbWater(waterPiece);
-                OnWaterAbsorbing?.Invoke(collision);
+                OnWaterAbsorbing?.Invoke(collision.contacts);
             }
         }
 
