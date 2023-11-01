@@ -141,6 +141,7 @@ namespace Screens
 
         public void PlaySelectedPress()
         {
+            Time.timeScale = 1;
             levelManager.LoadLevel(levelsUIElements[selectedLevelIndex].Level);
         }
     }

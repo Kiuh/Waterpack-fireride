@@ -51,17 +51,20 @@ namespace Screens
 
         private void MainMenuPress()
         {
+            Time.timeScale = 1;
             levelManager.LoadMainScene();
         }
 
         private void NextLevelPress()
         {
+            Time.timeScale = 1;
             Level currentLevel = levelsConfig.GetCurrentLevel();
             levelManager.LoadLevel(currentLevel);
         }
 
         private void RestartPress()
         {
+            Time.timeScale = 1;
             levelManager.RestartCurrentLevel();
         }
 
