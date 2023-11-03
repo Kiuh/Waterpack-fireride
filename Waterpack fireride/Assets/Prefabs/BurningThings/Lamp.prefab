@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8194705975719198885}
   m_Layer: 6
   m_Name: Square
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -437,8 +437,7 @@ MonoBehaviour:
   polygonCollider: {fileID: 8194705975719198885}
   fireParticlePrefab: {fileID: 6878662515204687796, guid: c1baa10b56d50c9448946891b6389000, type: 3}
   burningThing: {fileID: 7188311342888748271}
-  firersPerAmount: 1
-  firersShowing: 0
+  amountsPerFire: 0
 --- !u!50 &2824041569219118637
 Rigidbody2D:
   serializedVersion: 4
