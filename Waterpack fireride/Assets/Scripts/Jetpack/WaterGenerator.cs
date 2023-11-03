@@ -8,7 +8,8 @@ namespace Jetpack
     [Serializable]
     public struct GenerationInfo
     {
-        public float StartForce;
+        public float StartForceUp;
+        public float StartForceDown;
         public float AngleDelta;
     }
 
@@ -32,7 +33,7 @@ namespace Jetpack
         private WaterPiece waterPiecePrefab;
 
         [SerializeField]
-        private float waterGenerationPerSecond;
+        private float waterGenerationPerFrame;
 
         [SerializeField]
         private List<TransformWithDirection> produceDirectionPoints;
@@ -57,37 +58,13 @@ namespace Jetpack
             set => produceDirection = value;
         }
 
-        [SerializeField]
-        [InspectorReadOnly]
-        private float timer;
-
-        private float GenerationCoolDown => 1f / waterGenerationPerSecond;
-
-        private void Awake()
-        {
-            timer = GenerationCoolDown;
-        }
-
         private void FixedUpdate()
         {
             if (generating)
             {
-                timer -= Time.fixedDeltaTime;
-                if (timer < 0f)
+                for (int i = 0; i < waterGenerationPerFrame; ++i)
                 {
                     ProduceWater();
-                    if (Math.Abs(timer) > GenerationCoolDown)
-                    {
-                        for (int i = 0; i < (int)(timer / GenerationCoolDown); i++)
-                        {
-                            ProduceWater();
-                        }
-                        timer = GenerationCoolDown + (timer % GenerationCoolDown);
-                    }
-                    else
-                    {
-                        timer = GenerationCoolDown;
-                    }
                 }
             }
         }
@@ -95,7 +72,7 @@ namespace Jetpack
         private void ProduceWater()
         {
             Vector3 point = produceDirectionPoints
-                .Find(x => x.ProduceDirection == produceDirection)
+                .Find(x => x.ProduceDirection == produceDirection.ToOpposite())
                 .Transform.position;
             WaterPiece water = Instantiate(
                 waterPiecePrefab,
@@ -110,9 +87,13 @@ namespace Jetpack
                             generationInfo.AngleDelta
                         )
                 )
-                    * Vector2.down
-                    * produceDirection.ToFloat()
-                    * generationInfo.StartForce,
+                    * Vector2.up
+                    * produceDirection.ToOpposite().ToFloat()
+                    * (
+                        produceDirection.ToOpposite() == VerticalDirection.Up
+                            ? generationInfo.StartForceUp
+                            : generationInfo.StartForceDown
+                    ),
                 ForceMode2D.Impulse
             );
             water.SetInfo(waterInfo);

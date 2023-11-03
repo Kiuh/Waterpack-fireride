@@ -1,6 +1,7 @@
 ﻿using Common;
 using Jetpack;
 using Player.Movement;
+using System.Linq;
 using UnityEngine;
 
 namespace Player
@@ -48,8 +49,27 @@ namespace Player
             wallCheck.OnWallTouch += view.Flip;
         }
 
+        private void FixedUpdate()
+        {
+            if (groundCheck.IsTouchGround)
+            {
+                stamina.FillMaxStamina();
+            }
+        }
+
         private void Update()
         {
+            if (
+                Input.touchCount > 0
+                && RayCastUtilities
+                    .UIRayCast(Input.GetTouch(0).position)
+                    .Where(x => x.CompareTag("OverlayUI"))
+                    .Count() > 0
+            )
+            {
+                return;
+            }
+
             if (Input.touchCount > 0)
             {
                 touchDelta += Time.deltaTime;

@@ -30,13 +30,13 @@ namespace Environment
         public bool IsActive => isActive;
 
         public event Action OnInActive;
-        public event Action OnFireAdding;
-        public event Action<ContactPoint2D[]> OnWaterAbsorbing;
+        public event Action<int> OnFireAdding;
+        public event Action<ContactPoint2D[], int> OnWaterAbsorbing;
 
         public void SetBurningInfo(BurningInfo burningInfo)
         {
             this.burningInfo = burningInfo;
-            OnFireAdding?.Invoke();
+            OnFireAdding?.Invoke(this.burningInfo.FireAmount);
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
@@ -67,8 +67,8 @@ namespace Environment
         {
             if (collision.collider.TryGetComponent(out WaterPiece waterPiece))
             {
+                OnWaterAbsorbing?.Invoke(collision.contacts, waterPiece.WaterInfo.Extinguishing);
                 AbsorbWater(waterPiece);
-                OnWaterAbsorbing?.Invoke(collision.contacts);
             }
         }
 
@@ -76,7 +76,7 @@ namespace Environment
         {
             burningInfo.FireAmount -= waterPiece.WaterInfo.Extinguishing;
 
-            if (burningInfo.FireAmount < 0)
+            if (burningInfo.FireAmount <= 0)
             {
                 isActive = false;
                 OnInActive?.Invoke();
