@@ -1,6 +1,5 @@
 ﻿using Configs;
 using General;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -36,8 +35,17 @@ namespace Screens
         [SerializeField]
         private LevelManager levelManager;
 
-        private void Awake()
+        private StateButtonController soundStateButtonController;
+
+        private StateButtonController musicStateButtonController;
+
+        private void Start()
         {
+            soundStateButtonController =
+                buttonSound.gameObject.GetComponent<StateButtonController>();
+            musicStateButtonController =
+                buttonMusic.gameObject.GetComponent<StateButtonController>();
+
             buttonPlay.onClick.AddListener(PlayPress);
             buttonSelectLevel.onClick.AddListener(SelectLevelPress);
             buttonMusic.onClick.AddListener(MusicPress);
@@ -60,15 +68,13 @@ namespace Screens
         private void MusicPress()
         {
             generalSettings.MusicSwitch = !generalSettings.MusicSwitch;
-            buttonMusic.GetComponentInChildren<TextMeshProUGUI>().text =
-                "Music\n" + (generalSettings.MusicSwitch ? "ON" : "OFF");
+            musicStateButtonController.SwitchSprite();
         }
 
         private void SoundPress()
         {
             generalSettings.SoundSwitch = !generalSettings.SoundSwitch;
-            buttonSound.GetComponentInChildren<TextMeshProUGUI>().text =
-                "Sound\n" + (generalSettings.SoundSwitch ? "ON" : "OFF");
+            soundStateButtonController.SwitchSprite();
         }
 
         private void AboutPress()

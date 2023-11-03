@@ -18,6 +18,9 @@ namespace Screens
         private RectTransform settingsPanel;
 
         [SerializeField]
+        private RectTransform mainMenu;
+
+        [SerializeField]
         private float minPosition,
             maxPosition,
             slideTime,
@@ -27,6 +30,11 @@ namespace Screens
         private float settingPanelMinPosition,
             settingPanelMaxPosition,
             settingPanelSlideTime;
+
+        [SerializeField]
+        private float minPositionMainMenu,
+            maxPositionMainMenu,
+            slideTimeMainMenu;
 
         private float startPositionY,
             startAnchoredPositionY,
@@ -40,6 +48,7 @@ namespace Screens
         public void ShowSelectLevelPanel()
         {
             _ = LeanTween.moveX(settingsPanel, settingPanelMinPosition, settingPanelSlideTime);
+            _ = LeanTween.moveY(mainMenu, minPositionMainMenu, slideTimeMainMenu);
             _ = StartCoroutine(
                 HandleMenuSlide(slideTime, selectLevelRectTransform.anchoredPosition.y, maxPosition)
             );
@@ -70,6 +79,7 @@ namespace Screens
             if (IsAfterSlideDownPoint())
             {
                 _ = LeanTween.moveX(settingsPanel, settingPanelMaxPosition, settingPanelSlideTime);
+                _ = LeanTween.moveY(mainMenu, maxPositionMainMenu, slideTimeMainMenu);
                 _ = StartCoroutine(
                     HandleMenuSlide(
                         slideTime,
