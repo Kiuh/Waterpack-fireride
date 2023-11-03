@@ -23,7 +23,14 @@ namespace Jetpack
         public void SetInfo(WaterInfo waterInfo)
         {
             this.waterInfo = waterInfo;
-            Destroy(gameObject, waterInfo.LifeTime);
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.collider.CompareTag("Ground"))
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

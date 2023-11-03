@@ -27,7 +27,7 @@ namespace Screens
         private void UpdateTimerText()
         {
             string minutes = ((int)(playTime / 60)).ToString();
-            string seconds = ((int)(playTime - (int)(playTime / 60))).ToString();
+            string seconds = ((int)(playTime - ((int)(playTime / 60) * 60))).ToString();
             string milliseconds = ((int)(playTime % 1 * 100)).ToString();
 
             if (seconds.Length < 2)
