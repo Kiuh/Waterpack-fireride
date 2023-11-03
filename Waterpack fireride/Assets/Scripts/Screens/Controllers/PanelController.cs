@@ -48,12 +48,14 @@ public class PanelController : MonoBehaviour
     public void Lose()
     {
         EndGame();
+        //loseScreenMenu.gameObject.SetActive(true);
         loseScreenMenu.OpenScreen();
     }
 
     public void Win()
     {
         EndGame();
+        //winScreenMenu.gameObject.SetActive(true);
         winScreenMenu.OpenScreen();
     }
 

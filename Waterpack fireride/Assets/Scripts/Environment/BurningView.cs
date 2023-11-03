@@ -1,5 +1,4 @@
-﻿using Common;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -24,13 +23,10 @@ namespace Environment
         private BurningThing burningThing;
 
         [SerializeField]
-        private uint firersPerAmount;
-
-        [SerializeField]
-        [InspectorReadOnly]
-        private int firersShowing;
+        private uint amountsPerFire;
 
         private List<PositionedParticle> positionedParticles = new();
+        private PositionedParticle positionedParticle;
 
         private void Awake()
         {
@@ -43,7 +39,7 @@ namespace Environment
         {
             if (burningThing.IsUnique)
             {
-                BurningThing_OnFireAdding();
+                BurningThing_OnFireAdding(burningThing.BurningInfo.FireAmount);
             }
         }
 
@@ -54,18 +50,15 @@ namespace Environment
                 Destroy(positionedParticles.Last().FireObject);
                 _ = positionedParticles.Remove(positionedParticles.Last());
             }
+            Destroy(positionedParticle.FireObject);
         }
 
-        private void BurningThing_OnFireAdding()
+        private void BurningThing_OnFireAdding(int amount)
         {
-            int delta = burningThing.BurningInfo.FireAmount - firersShowing;
-            if (delta > 0)
+            positionedParticle = SpawnFire();
+            for (int i = 0; i < amount / amountsPerFire; i++)
             {
-                for (int i = 0; i < delta / firersPerAmount; i++)
-                {
-                    positionedParticles.Add(SpawnFire());
-                }
-                firersShowing = burningThing.BurningInfo.FireAmount;
+                positionedParticles.Add(SpawnFire());
             }
         }
 
@@ -81,25 +74,21 @@ namespace Environment
             return new PositionedParticle() { FireObject = fire, Position = position };
         }
 
-        private void BurningThing_OnWaterAbsorbing(ContactPoint2D[] contacts)
+        private void BurningThing_OnWaterAbsorbing(ContactPoint2D[] contacts, int amount)
         {
-            int delta = burningThing.BurningInfo.FireAmount - firersShowing;
-            if (delta < 0)
-            {
-                Vector2 point =
+            Vector2 point =
+                (
                     contacts.Select(x => x.point).Aggregate(Vector2.zero, (x, y) => x + y)
-                    / contacts.Length;
-                positionedParticles = positionedParticles
-                    .OrderBy(x => Vector2.Distance(x.Position, point))
-                    .ToList();
-                for (int i = 0; i < (-delta) / firersPerAmount; i++)
-                {
-                    if (positionedParticles.Count > 0)
-                    {
-                        Destroy(positionedParticles.Last().FireObject);
-                        _ = positionedParticles.Remove(positionedParticles.Last());
-                    }
-                }
+                    / contacts.Length
+                ) + (Vector2)transform.position;
+            positionedParticles = positionedParticles
+                .OrderBy(x => Vector2.Distance(x.Position, point))
+                .ToList();
+
+            while (burningThing.BurningInfo.FireAmount < positionedParticles.Count * amountsPerFire)
+            {
+                Destroy(positionedParticles.Last().FireObject);
+                _ = positionedParticles.Remove(positionedParticles.Last());
             }
         }
 

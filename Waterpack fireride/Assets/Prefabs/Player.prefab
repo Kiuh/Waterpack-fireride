@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4058073247141994002}
   - component: {fileID: 1461295367862278159}
   m_Layer: 0
-  m_Name: Triangle
+  m_Name: WaterGen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,8 +26,8 @@ Transform:
   m_GameObject: {fileID: 2756866431848661536}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.382, y: 0.028, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: -0.255, y: 0.006, z: 0}
+  m_LocalScale: {x: 0.08, y: 0.08, z: 0.08}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8350727788199894826}
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Sprite: {fileID: -1756755879822675884, guid: 2ed578b6df6615b46a4cfca591f034c6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -142,7 +142,7 @@ Transform:
   m_GameObject: {fileID: 4084904276992238027}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.398, y: -0.118, z: 0}
+  m_LocalPosition: {x: -0.242, y: 0.334, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -173,7 +173,7 @@ Transform:
   m_GameObject: {fileID: 4280456252697125565}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.398, y: -0.118, z: 0}
+  m_LocalPosition: {x: -0.239, y: -0.319, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -188,7 +188,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7568292060539202264}
-  - component: {fileID: 5999975760470086313}
   - component: {fileID: 7051262729877546782}
   - component: {fileID: 3795492110854701035}
   - component: {fileID: 786669094236510193}
@@ -200,6 +199,8 @@ GameObject:
   - component: {fileID: 8048135795808356850}
   - component: {fileID: 1743573810821465442}
   - component: {fileID: 1291224402646154176}
+  - component: {fileID: 3062037913446183279}
+  - component: {fileID: 4048032810618361473}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -225,52 +226,6 @@ Transform:
   - {fileID: 4289753222670858067}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &5999975760470086313
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5672764171541279783}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 0.5, y: 1}
-  m_EdgeRadius: 0
 --- !u!50 &7051262729877546782
 Rigidbody2D:
   serializedVersion: 4
@@ -333,7 +288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8755595b0468cfc49bcd307df44db175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flyStrength: 4
+  flyStrength: 3
   rigidBody2D: {fileID: 7051262729877546782}
   collisionCheck: {fileID: 6528082964883302045}
   isFlying: 0
@@ -383,9 +338,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2087cc858c3552648b134a4d0e0fa7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collider: {fileID: 5999975760470086313}
-  wallRayDistance: 0.05
-  isTouchWall: 0
+  touchDelay: 0.1
+  timer: 0
 --- !u!114 &6528082964883302045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,7 +352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0336cfa82ba4b3349b0619627014605a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collider: {fileID: 5999975760470086313}
+  collider: {fileID: 4048032810618361473}
   groundRayDistance: 0.55
   isTouchGround: 0
 --- !u!114 &6222089774818006376
@@ -419,7 +373,7 @@ MonoBehaviour:
     currentValue: 100
     minValue: 0
   absorbingAmount:
-    sourceValue: 0
+    sourceValue: 4
   absorbing: 0
   canAbsorbing: 1
 --- !u!114 &8048135795808356850
@@ -468,13 +422,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waterInfo:
-    Extinguishing: 10
-    LifeTime: 2
+    Extinguishing: 1
+    LifeTime: 7
   generationInfo:
-    StartForce: 3
-    AngleDelta: 0
+    StartForceUp: 6
+    StartForceDown: 2
+    AngleDelta: 15
   waterPiecePrefab: {fileID: 5794055748662830804, guid: 66e01b077fccd074c98cab2043dca81e, type: 3}
-  waterGenerationPerSecond: 200
+  waterGenerationPerFrame: 3
   produceDirectionPoints:
   - Transform: {fileID: 4289753222670858067}
     ProduceDirection: 0
@@ -482,7 +437,55 @@ MonoBehaviour:
     ProduceDirection: 1
   generating: 0
   produceDirection: 0
-  timer: 0
+--- !u!114 &3062037913446183279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5672764171541279783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83451da17db842e49b77f4a343628102, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!70 &4048032810618361473
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5672764171541279783}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.047710657, y: 0}
+  m_Size: {x: 0.37630558, y: 1}
+  m_Direction: 0
 --- !u!1 &8684381917903538575
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,7 +497,7 @@ GameObject:
   - component: {fileID: 4616079917034557726}
   - component: {fileID: 7856263863156087109}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Girl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -510,8 +513,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8350727788199894826}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -556,7 +559,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 4709629239209144956, guid: 82a0b852a5207d64f9fc2f7db2a3732c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
