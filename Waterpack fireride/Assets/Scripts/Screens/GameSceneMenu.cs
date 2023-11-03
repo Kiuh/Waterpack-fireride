@@ -1,6 +1,5 @@
 using Configs;
 using General;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -65,10 +64,18 @@ namespace Screens
 
         private Image pausePanelImage;
 
+        private StateButtonController soundStateButtonController;
+
+        private StateButtonController musicStateButtonController;
+
         //private float playingTime = 0;
 
         private void Awake()
         {
+            soundStateButtonController =
+                soundButton.gameObject.GetComponentInChildren<StateButtonController>();
+            musicStateButtonController =
+                musicButton.gameObject.GetComponentInChildren<StateButtonController>();
             pausePanelCanvasGroup = pausePanelGO.GetComponent<CanvasGroup>();
             pausePanelImage = pausePanelGO.GetComponent<Image>();
             pauseButtonRectTransform = pauseButton.GetComponent<RectTransform>();
@@ -85,15 +92,13 @@ namespace Screens
         private void MusicPress()
         {
             generalSettings.MusicSwitch = !generalSettings.MusicSwitch;
-            musicButton.GetComponentInChildren<TextMeshProUGUI>().text =
-                "Music\n" + (generalSettings.MusicSwitch ? "ON" : "OFF");
+            musicStateButtonController.SwitchSprite();
         }
 
         private void SoundPress()
         {
             generalSettings.SoundSwitch = !generalSettings.SoundSwitch;
-            soundButton.GetComponentInChildren<TextMeshProUGUI>().text =
-                "Sound\n" + (generalSettings.SoundSwitch ? "ON" : "OFF");
+            soundStateButtonController.SwitchSprite();
         }
 
         private void AboutPress()
