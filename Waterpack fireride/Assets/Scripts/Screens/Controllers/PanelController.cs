@@ -6,6 +6,9 @@ using UnityEngine;
 public class PanelController : MonoBehaviour
 {
     [SerializeField]
+    private Fuel fuel;
+
+    [SerializeField]
     private BurningManager burningManager;
 
     [SerializeField]
@@ -43,6 +46,7 @@ public class PanelController : MonoBehaviour
     {
         burningManager.OnAllInactive += Win;
         playerCore.OnDeath += Lose;
+        fuel.OnOutOfFuel += Lose;
     }
 
     public void Lose()

@@ -30,6 +30,9 @@ namespace Screens
         [SerializeField]
         private Button nextLevelButton;
 
+        [SerializeField]
+        private TextMeshProUGUI timerText;
+
         [Header("Animation settings")]
         [Space]
         [SerializeField]
@@ -78,15 +81,16 @@ namespace Screens
 
         public void OpenScreen()
         {
+            levelPlayTime.text = timerText.text;
             _ = LeanTween
                 .moveY(winScreenMenuRectTransform, maxPanelPositionY, animationSpeed)
                 .setIgnoreTimeScale(true);
-            int index = levelsConfig.GetLevelIndexByName(levelManager.CurrentLevel.LevelName);
+            int index = levelsConfig.GetCurrentLevelIndex();
 
             List<Level> levels = levelsConfig.Levels;
 
             levels[index].LevelState = LevelState.Passed;
-            levels[index].LevelState = LevelState.Current;
+            levels[index + 1].LevelState = LevelState.Current;
         }
     }
 }

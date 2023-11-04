@@ -1,4 +1,5 @@
 ﻿using Common;
+using System;
 using UnityEngine;
 
 namespace Player
@@ -12,6 +13,8 @@ namespace Player
 
         [SerializeField]
         private ModifiableValue<float> absorbingAmount;
+
+        public event Action OnOutOfFuel;
 
         [SerializeField]
         [InspectorReadOnly]
@@ -35,6 +38,7 @@ namespace Player
                 if (fuel.Value <= 0)
                 {
                     fuel.Value = 0;
+                    OnOutOfFuel?.Invoke();
                     canAbsorbing = false;
                 }
             }

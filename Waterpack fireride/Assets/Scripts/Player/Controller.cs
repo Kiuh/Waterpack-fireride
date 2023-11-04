@@ -46,7 +46,7 @@ namespace Player
         private void Awake()
         {
             groundCheck.OnGroundTouch += stamina.FillMaxStamina;
-            wallCheck.OnWallTouch += view.Flip;
+            //wallCheck.OnWallTouch += view.Flip;
         }
 
         private void FixedUpdate()
@@ -85,7 +85,7 @@ namespace Player
                 && touchDelta <= neededTouchDelta
             )
             {
-                jumping.Jump();
+                //   jumping.Jump();
             }
             else if (
                 Input.touchCount > 0

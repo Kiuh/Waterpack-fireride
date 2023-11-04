@@ -536,7 +536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2087cc858c3552648b134a4d0e0fa7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  touchDelay: 0.1
+  touchDelay: 0.2
   timer: 0
 --- !u!114 &6528082964883302045
 MonoBehaviour:
@@ -567,8 +567,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fuel:
     maxValue:
-      sourceValue: 100
-    currentValue: 100
+      sourceValue: 20
+    currentValue: 20
     minValue: 0
   absorbingAmount:
     sourceValue: 4
@@ -588,11 +588,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stamina:
     maxValue:
-      sourceValue: 20
-    currentValue: 20
+      sourceValue: 10
+    currentValue: 10
     minValue: 0
   absorbingAmount:
-    sourceValue: 3
+    sourceValue: 5
   absorbing: 0
   canAbsorbing: 1
 --- !u!114 &1743573810821465442
@@ -607,6 +607,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4d7b005a769395459645b2af80bd2f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  running: {fileID: 8864804160273145252}
 --- !u!114 &1291224402646154176
 MonoBehaviour:
   m_ObjectHideFlags: 0
