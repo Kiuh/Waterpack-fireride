@@ -51,6 +51,7 @@ namespace Screens
             buttonMusic.onClick.AddListener(MusicPress);
             buttonSound.onClick.AddListener(SoundPress);
             buttonAbout.onClick.AddListener(AboutPress);
+            levelManager.CurrentLevel = levelsConfig.GetCurrentLevel();
         }
 
         private void PlayPress()

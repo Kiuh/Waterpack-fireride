@@ -19,6 +19,8 @@ namespace Player.Movement
         [InspectorReadOnly]
         private HorizontalDirection runDirection = HorizontalDirection.Right;
 
+        public HorizontalDirection HorizontalDirection => runDirection;
+
         private void Awake()
         {
             wallCheck.OnWallTouch += CollisionCheck_OnWallTouch;

@@ -26,7 +26,7 @@ namespace Environment
             }
             foreach (BurningThing item in burningThings.Where(x => !x.IsUnique))
             {
-                item.SetBurningInfo(defaultBurningInfo);
+                //       item.SetBurningInfo(defaultBurningInfo);
             }
         }
 
